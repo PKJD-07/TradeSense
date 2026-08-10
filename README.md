@@ -35,3 +35,8 @@ notebooks/     Research and experimentation
 src/           Core application code
 tests/         Automated tests
 docs/          Project documentation
+```
+
+## Documentation
+
+- [Data Pipeline](docs/data_pipeline.md) — historical market-data ingestion: OHLCV model, provider abstraction, validation, and preprocessing.
