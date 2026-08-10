@@ -40,3 +40,4 @@ docs/          Project documentation
 ## Documentation
 
 - [Data Pipeline](docs/data_pipeline.md) — historical market-data ingestion: OHLCV model, provider abstraction, validation, and preprocessing.
+- [EDA & ML Target Definitions](docs/eda_analysis.md) — exploratory data analysis, the execution/target convention, and anti-leakage methodology.
