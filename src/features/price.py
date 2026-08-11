@@ -15,13 +15,18 @@ import pandas as pd
 
 
 def _safe_ratio(numerator: pd.Series | np.ndarray, denominator: pd.Series | np.ndarray) -> pd.Series:
-    """Compute ratio, returning NaN where denominator is zero or NaN."""
+    """Compute ratio, returning NaN where denominator is zero or NaN.
+
+    Preserves the input index so the result aligns when a DataFrame is built
+    from feature series (a RangeIndex would fail to align to a DatetimeIndex).
+    """
+    index = getattr(numerator, "index", None)
     numerator = np.asarray(numerator, dtype=float)
     denominator = np.asarray(denominator, dtype=float)
     result = np.full_like(numerator, fill_value=np.nan, dtype=float)
     valid = (denominator != 0) & np.isfinite(denominator) & np.isfinite(numerator)
     result[valid] = numerator[valid] / denominator[valid]
-    return pd.Series(result)
+    return pd.Series(result, index=index)
 
 
 def return_1d(df: pd.DataFrame) -> pd.Series:
