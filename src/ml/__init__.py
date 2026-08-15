@@ -21,6 +21,8 @@ Modules:
                     interpretation diagnostics
     validation      date-based split, purge gap, expanding walk-forward
     experiment      ExperimentConfig/Result, run_experiment()
+    signal_adapter  ML predictions → TradingSignal conversion
+    signal_types    Shared TradingSignal abstraction (ML ↔ backtester)
 """
 
 from src.ml.constants import (
@@ -56,6 +58,16 @@ from src.ml.experiment import (
     run_experiment,
     save_experiment,
 )
+from src.ml.signal_adapter import (
+    MLSignalAdapter,
+    SignalThresholds,
+    DEFAULT_ADAPTER,
+)
+from src.ml.signal_types import (
+    TradingSignal,
+    SignalAction,
+    SignalSource,
+)
 
 __all__ = [
     "WARMUP_ROWS",
@@ -87,4 +99,10 @@ __all__ = [
     "ExperimentResult",
     "run_experiment",
     "save_experiment",
+    "MLSignalAdapter",
+    "SignalThresholds",
+    "DEFAULT_ADAPTER",
+    "TradingSignal",
+    "SignalAction",
+    "SignalSource",
 ]
