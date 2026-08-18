@@ -1,3 +1,5 @@
+from collections.abc import Callable
+
 from backend.app.api.schemas.market import MarketCandle
 from backend.app.analysis.service import analyze_market
 from backend.app.analysis.signals import generate_signal
@@ -6,6 +8,7 @@ from backend.app.backtesting.risk import (
     calculate_stop_loss,
     calculate_take_profit,
 )
+from backend.app.signals.schema import TradingSignal
 
 
 def backtest_strategy(
@@ -13,6 +16,9 @@ def backtest_strategy(
     initial_capital: float = 100000.0,
     stop_loss_percent: float = 2.0,
     take_profit_percent: float = 4.0,
+    signal_provider: Callable[
+        [list[MarketCandle]], TradingSignal
+    ] | None = None,
 ) -> dict:
 
     if len(historical_candles) < 50:
@@ -32,8 +38,23 @@ def backtest_strategy(
         historical_data = historical_candles[: i + 1]
         current_candle = historical_candles[i]
 
-        analysis = analyze_market(historical_data)
-        signal = generate_signal(analysis)
+        # --------------------------------------------------
+        # Generate trading signal
+        # --------------------------------------------------
+
+        if signal_provider is not None:
+            signal = signal_provider(historical_data)
+        else:
+            analysis = analyze_market(historical_data)
+            signal = generate_signal(analysis)
+
+        # Support both:
+        # 1. New TradingSignal
+        # 2. Existing rule-based signal dictionary
+        if isinstance(signal, TradingSignal):
+            decision = signal.action.value
+        else:
+            decision = signal["decision"]
 
         current_price = current_candle.close
         current_date = current_candle.timestamp
@@ -103,7 +124,7 @@ def backtest_strategy(
                 position_size = 0
 
             # Signal says SELL
-            elif signal["decision"] == "SELL":
+            elif decision == "SELL":
 
                 exit_price = current_price
 
@@ -130,7 +151,7 @@ def backtest_strategy(
         # Open new position
         # --------------------------------------------------
 
-        if position is None and signal["decision"] == "BUY":
+        if position is None and decision == "BUY":
 
             entry_price = current_price
             entry_date = current_date
@@ -297,6 +318,10 @@ def backtest_strategy(
 
         if drawdown < maximum_drawdown:
             maximum_drawdown = drawdown
+
+    # ------------------------------------------------------
+    # Result
+    # ------------------------------------------------------
 
     return {
         "initial_capital": initial_capital,
