@@ -158,3 +158,75 @@ def test_output_is_deterministic():
     )
 
     assert signal_1 == signal_2
+
+
+def test_exact_buy_threshold():
+    adapter = MLSignalAdapter(
+        buy_threshold=0.60,
+        sell_threshold=0.60,
+    )
+
+    signal = adapter.adapt(
+        timestamp=datetime(2026, 8, 18, 10, 0),
+        symbol="RELIANCE",
+        probability_down=0.20,
+        probability_neutral=0.20,
+        probability_up=0.60,
+    )
+
+    assert signal.action == SignalAction.BUY
+    assert signal.confidence == 0.60
+
+
+def test_exact_sell_threshold():
+    adapter = MLSignalAdapter(
+        buy_threshold=0.60,
+        sell_threshold=0.60,
+    )
+
+    signal = adapter.adapt(
+        timestamp=datetime(2026, 8, 18, 10, 0),
+        symbol="RELIANCE",
+        probability_down=0.60,
+        probability_neutral=0.20,
+        probability_up=0.20,
+    )
+
+    assert signal.action == SignalAction.SELL
+    assert signal.confidence == 0.60
+
+
+def test_neutral_highest_results_in_hold():
+    adapter = MLSignalAdapter()
+
+    signal = adapter.adapt(
+        timestamp=datetime(2026, 8, 18, 10, 0),
+        symbol="RELIANCE",
+        probability_down=0.20,
+        probability_neutral=0.70,
+        probability_up=0.10,
+    )
+
+    assert signal.action == SignalAction.HOLD
+    assert signal.confidence == 0.70
+
+
+def test_signal_metadata_is_preserved():
+    timestamp = datetime(2026, 8, 18, 10, 0)
+
+    adapter = MLSignalAdapter()
+
+    signal = adapter.adapt(
+        timestamp=timestamp,
+        symbol="RELIANCE",
+        probability_down=0.10,
+        probability_neutral=0.20,
+        probability_up=0.70,
+        source="ML",
+        model="RandomForest_v1",
+    )
+
+    assert signal.timestamp == timestamp
+    assert signal.symbol == "RELIANCE"
+    assert signal.source == "ML"
+    assert signal.model == "RandomForest_v1"
