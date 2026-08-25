@@ -1,0 +1,263 @@
+
+.market-overview {
+  width: 100%;
+  margin-top: 100px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: rgba(5, 5, 5, 0.72);
+  backdrop-filter: blur(22px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.market-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.market-eyebrow {
+  margin-bottom: 12px;
+  color: #b19d3c;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.market-symbol-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.market-symbol-row h3 {
+  margin: 0;
+  color: #f5f2e9;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.exchange {
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================
+   LIVE INDICATOR
+========================================= */
+
+.market-live {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.market-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #72b957;
+  box-shadow:
+    0 0 10px rgba(114, 185, 87, 0.8);
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+.market-main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 42px;
+}
+
+.price-section {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.price {
+  color: #f5f2e9;
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+.price-change {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.price-change span {
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+/* PROFIT */
+
+.price-change.positive {
+  color: #72b957;
+}
+
+/* LOSS */
+
+.price-change.negative {
+  color: #d06464;
+}
+
+/* =========================================
+   METADATA
+========================================= */
+
+.market-meta {
+  display: flex;
+  gap: 52px;
+}
+
+.market-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.market-meta span {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.market-meta strong {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.market-meta .status-positive {
+  color: #72b957;
+}
+
+/* =========================================
+   TIMEFRAMES
+========================================= */
+
+.timeframes {
+  display: flex;
+  gap: 7px;
+  margin-top: 42px;
+  padding-top: 23px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.timeframes button {
+  padding: 11px 17px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.46);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.timeframes button:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.timeframes button.selected {
+  color: #b19d3c;
+  border-color: rgba(177, 157, 60, 0.2);
+  background: rgba(177, 157, 60, 0.08);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+  .market-overview {
+    padding: 28px;
+  }
+
+  .market-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 34px;
+  }
+
+  .market-meta {
+    width: 100%;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .market-symbol-row h3 {
+    font-size: 28px;
+  }
+
+  .price {
+    font-size: 50px;
+  }
+
+  .price-change {
+    font-size: 16px;
+  }
+
+  .market-meta strong {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .market-overview {
+    padding: 22px;
+  }
+
+  .market-header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .market-symbol-row h3 {
+    font-size: 26px;
+  }
+
+  .price {
+    font-size: 46px;
+  }
+
+  .market-meta {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .timeframes {
+    overflow-x: auto;
+  }
+
+  .timeframes button {
+    flex-shrink: 0;
+  }
+}

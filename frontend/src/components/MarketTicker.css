@@ -1,0 +1,191 @@
+.market-ticker {
+  width: 100%;
+  height: 48px;
+  padding: 0 42px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.market-ticker-header {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.market-ticker-header > span {
+  display: none;
+}
+
+/* =========================================
+   MARKET LIST
+========================================= */
+
+.market-ticker-list {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  flex: 1;
+  min-width: 0;
+
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* =========================================
+   MARKET DATA
+========================================= */
+
+.market-ticker-item {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.market-ticker-name {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.market-ticker-item strong {
+  color: #f5f2e9;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.market-change {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.market-change.positive {
+  color: #72b957;
+}
+
+.market-change.negative {
+  color: #d06464;
+}
+
+/* =========================================
+   NSE STATUS — FAR RIGHT
+========================================= */
+
+.nse-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-left: auto;
+  padding-left: 28px;
+
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nse-status-dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: #72b957;
+
+  box-shadow: 0 0 8px rgba(114, 185, 87, 0.75);
+}
+
+.nse-status strong {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.nse-status-text {
+  color: #72b957;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+/* =========================================
+   LOADING / ERROR
+========================================= */
+
+.market-loading {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .market-ticker {
+    padding: 0 28px;
+  }
+
+  .market-ticker-list {
+    gap: 22px;
+  }
+
+  .nse-status {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .market-ticker {
+    padding: 0 20px;
+  }
+
+  .market-ticker-list {
+    gap: 18px;
+  }
+
+  .nse-status-text {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .market-ticker {
+    height: 46px;
+    padding: 0 16px;
+  }
+
+  .market-ticker-list {
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .market-ticker-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nse-status {
+    padding-left: 14px;
+  }
+
+  .nse-status strong {
+    font-size: 10px;
+  }
+}

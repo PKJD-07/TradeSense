@@ -1,0 +1,206 @@
+.navbar {
+  height: 84px;
+  padding: 0 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+
+  background: rgba(5, 5, 5, 0.68);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-sizing: border-box;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-logo {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(177, 157, 60, 0.65);
+  border-radius: 9px;
+
+  color: #b19d3c;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.navbar-title {
+  color: #f5f2e9;
+
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.navbar-subtitle {
+  margin-top: 4px;
+
+  color: rgba(255, 255, 255, 0.42);
+
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  padding: 11px 17px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+  color: rgba(255, 255, 255, 0.58);
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-link.active {
+  color: #b19d3c;
+
+  border-color: rgba(177, 157, 60, 0.18);
+  background: rgba(177, 157, 60, 0.07);
+}
+
+/* =========================================
+   MARKET STATUS
+========================================= */
+
+.navbar-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* =========================================
+   MARKET OPEN
+========================================= */
+
+.navbar-status.market-open .status-dot {
+  background: #72b957;
+  box-shadow: 0 0 10px rgba(114, 185, 87, 0.8);
+}
+
+.navbar-status.market-open .navbar-market-status {
+  color: #72b957;
+}
+
+/* =========================================
+   MARKET CLOSED
+========================================= */
+
+.navbar-status.market-closed .status-dot {
+  background: #d06464;
+  box-shadow: 0 0 10px rgba(208, 100, 100, 0.8);
+}
+
+.navbar-status.market-closed .navbar-market-status {
+  color: #d06464;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 28px;
+  }
+
+  .navbar-links {
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 10px 13px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    height: 78px;
+    padding: 0 20px;
+  }
+
+  .navbar-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .navbar-title {
+    font-size: 19px;
+  }
+
+  .navbar-subtitle {
+    font-size: 11px;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-market-status {
+    display: none;
+  }
+}

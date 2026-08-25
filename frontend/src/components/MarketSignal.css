@@ -1,0 +1,521 @@
+.market-signal {
+  margin-top: 32px;
+  padding: 34px 36px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+
+  background: rgba(5, 5, 5, 0.62);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.signal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.signal-eyebrow {
+  margin-bottom: 11px;
+
+  color: #b19d3c;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+}
+
+.signal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.signal-title-row h3 {
+  margin: 0;
+
+  color: #f5f2e9;
+
+  font-size: 30px;
+  font-weight: 500;
+
+  letter-spacing: -0.025em;
+}
+
+.signal-title-row span {
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+}
+
+/* =========================================
+   SIGNAL BADGE
+========================================= */
+
+.signal-badge {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 10px 15px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.signal-badge-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+/* BUY */
+
+.signal-badge.signal-buy {
+  color: #79c98b;
+
+  background: rgba(121, 201, 139, 0.08);
+
+  border: 1px solid rgba(121, 201, 139, 0.18);
+}
+
+.signal-badge.signal-buy .signal-badge-dot {
+  background: #79c98b;
+}
+
+/* SELL */
+
+.signal-badge.signal-sell {
+  color: #d97878;
+
+  background: rgba(217, 120, 120, 0.08);
+
+  border: 1px solid rgba(217, 120, 120, 0.18);
+}
+
+.signal-badge.signal-sell .signal-badge-dot {
+  background: #d97878;
+}
+
+/* HOLD */
+
+.signal-badge.signal-hold {
+  color: #d1c27a;
+
+  background: rgba(209, 194, 122, 0.08);
+
+  border: 1px solid rgba(209, 194, 122, 0.18);
+}
+
+.signal-badge.signal-hold .signal-badge-dot {
+  background: #d1c27a;
+}
+
+/* =========================================
+   MAIN SIGNAL
+========================================= */
+
+.signal-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 38px;
+  padding: 28px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+  gap: 48px;
+}
+
+/* =========================================
+   CURRENT ASSESSMENT
+========================================= */
+
+.signal-decision {
+  min-width: 180px;
+}
+
+.signal-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+}
+
+.signal-decision strong {
+  display: block;
+
+  font-size: 52px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  letter-spacing: -0.04em;
+}
+
+/* Signal colors */
+
+.signal-buy {
+  color: #79c98b;
+}
+
+.signal-sell {
+  color: #d97878;
+}
+
+.signal-hold {
+  color: #d1c27a;
+}
+
+/* =========================================
+   SCORE
+========================================= */
+
+.signal-score {
+  margin-top: 12px;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 14px;
+}
+
+.signal-score span {
+  color: #f5f2e9;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* =========================================
+   INDICATORS
+========================================= */
+
+.signal-indicators {
+  flex: 1;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(110px, 1fr));
+
+  gap: 24px 30px;
+}
+
+.indicator {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.indicator span {
+  color: rgba(255, 255, 255, 0.43);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+}
+
+.indicator strong {
+  color: #f5f2e9;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  letter-spacing: -0.01em;
+}
+
+/* =========================================
+   HOLD EXPLANATION
+========================================= */
+
+.signal-explanation {
+  margin-top: 26px;
+
+  padding: 24px;
+
+  border: 1px solid rgba(209, 194, 122, 0.12);
+
+  border-radius: 10px;
+
+  background: rgba(209, 194, 122, 0.035);
+}
+
+.explanation-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 15px;
+}
+
+/* INFO ICON */
+
+.explanation-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid rgba(209, 194, 122, 0.5);
+
+  border-radius: 50%;
+
+  color: #d1c27a;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.explanation-header strong {
+  color: #f5f2e9;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.explanation-header p {
+  margin: 7px 0 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.explanation-reasons {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 11px;
+
+  margin-top: 20px;
+
+  padding-left: 45px;
+}
+
+.explanation-reason {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.explanation-reason > span {
+  flex-shrink: 0;
+
+  width: 5px;
+  height: 5px;
+
+  margin-top: 8px;
+
+  border-radius: 50%;
+
+  background: #b19d3c;
+}
+
+/* =========================================
+   SIGNAL BREAKDOWN
+========================================= */
+
+.signal-reasons {
+  margin-top: 30px;
+}
+
+.reasons-title {
+  margin-bottom: 17px;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+}
+
+.reasons-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+}
+
+.reason {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+.reason-number {
+  flex-shrink: 0;
+
+  width: 28px;
+
+  color: rgba(255, 255, 255, 0.3);
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+/* =========================================
+   STATES
+========================================= */
+
+.signal-state {
+  margin-top: 30px;
+
+  padding: 30px 0;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  font-size: 14px;
+}
+
+.signal-error {
+  color: #d97878;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .signal-indicators {
+    grid-template-columns: repeat(2, minmax(110px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .signal-main {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .signal-indicators {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .market-signal {
+    padding: 26px 22px;
+  }
+
+  .signal-header {
+    flex-direction: column;
+  }
+
+  .signal-title-row {
+    flex-wrap: wrap;
+  }
+
+  .signal-title-row h3 {
+    font-size: 24px;
+  }
+
+  .signal-decision strong {
+    font-size: 44px;
+  }
+
+  .signal-indicators {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .indicator strong {
+    font-size: 16px;
+  }
+
+  .explanation-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+
+  .explanation-header strong {
+    font-size: 16px;
+  }
+
+  .explanation-header p,
+  .explanation-reason {
+    font-size: 13px;
+  }
+
+  .reason {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .signal-indicators {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px 16px;
+  }
+
+  .signal-title-row h3 {
+    font-size: 22px;
+  }
+
+  .signal-decision strong {
+    font-size: 40px;
+  }
+
+  .explanation-icon {
+    width: 28px;
+    height: 28px;
+
+    font-size: 16px;
+  }
+}

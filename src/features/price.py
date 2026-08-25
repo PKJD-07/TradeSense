@@ -14,68 +14,59 @@ import numpy as np
 import pandas as pd
 
 
-def _safe_ratio(numerator: pd.Series | np.ndarray, denominator: pd.Series | np.ndarray) -> pd.Series:
-    """Compute ratio, returning NaN where denominator is zero or NaN."""
+def _safe_ratio(
+    numerator: pd.Series | np.ndarray,
+    denominator: pd.Series | np.ndarray,
+) -> pd.Series:
+    """Compute ratio while preserving the original Series index."""
+    if isinstance(numerator, pd.Series):
+        index = numerator.index
+    elif isinstance(denominator, pd.Series):
+        index = denominator.index
+    else:
+        index = None
+
     numerator = np.asarray(numerator, dtype=float)
     denominator = np.asarray(denominator, dtype=float)
+
     result = np.full_like(numerator, fill_value=np.nan, dtype=float)
-    valid = (denominator != 0) & np.isfinite(denominator) & np.isfinite(numerator)
+
+    valid = (
+        (denominator != 0)
+        & np.isfinite(denominator)
+        & np.isfinite(numerator)
+    )
+
     result[valid] = numerator[valid] / denominator[valid]
-    return pd.Series(result)
+
+    return pd.Series(result, index=index)
 
 
 def return_1d(df: pd.DataFrame) -> pd.Series:
-    """1-session simple return: close_t / close_{t-1} - 1.
-
-    Information used: close[t], close[t-1]
-    NaN: first row (no prior close)
-    """
+    """1-session simple return: close_t / close_{t-1} - 1."""
     return df["close"].pct_change()
 
 
 def return_5d(df: pd.DataFrame) -> pd.Series:
-    """5-session simple return: close_t / close_{t-5} - 1.
-
-    Information used: close[t], close[t-5]
-    NaN: first 5 rows (insufficient lookback)
-    """
+    """5-session simple return: close_t / close_{t-5} - 1."""
     return df["close"].pct_change(5)
 
 
 def return_10d(df: pd.DataFrame) -> pd.Series:
-    """10-session simple return: close_t / close_{t-10} - 1.
-
-    Information used: close[t], close[t-10]
-    NaN: first 10 rows (insufficient lookback)
-    """
+    """10-session simple return: close_t / close_{t-10} - 1."""
     return df["close"].pct_change(10)
 
 
 def return_20d(df: pd.DataFrame) -> pd.Series:
-    """20-session simple return: close_t / close_{t-20} - 1.
-
-    Information used: close[t], close[t-20]
-    NaN: first 20 rows (insufficient lookback)
-    """
+    """20-session simple return: close_t / close_{t-20} - 1."""
     return df["close"].pct_change(20)
 
 
 def log_return_1d(df: pd.DataFrame) -> pd.Series:
-    """1-session log return: ln(close_t / close_{t-1}).
-
-    Information used: close[t], close[t-1]
-    NaN: first row (no prior close)
-    """
+    """1-session log return: ln(close_t / close_{t-1})."""
     return np.log(df["close"]).diff()
 
 
 def intraday_return(df: pd.DataFrame) -> pd.Series:
-    """Intraday return: close_t / open_t - 1.
-
-    This is a valid causal feature because it uses information available at
-    close_t to predict the subsequent session's target.
-
-    Information used: open[t], close[t]
-    NaN: never (assuming valid OHLCV data)
-    """
+    """Intraday return: close_t / open_t - 1."""
     return _safe_ratio(df["close"], df["open"]) - 1.0
