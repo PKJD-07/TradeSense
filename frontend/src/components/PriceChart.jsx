@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -22,12 +21,12 @@ const TIMEFRAMES = {
 };
 
 const LABEL_INTERVALS = {
-  "1M": 1,   // every trading day
-  "3M": 3,   // every 3 trading days
-  "6M": 5,   // every 5 trading days
-  "1Y": 21,  // approximately every 1 month
-  "2Y": 42,  // approximately every 2 months
-  "5Y": 63,  // approximately every 3 months
+  "1M": 1,
+  "3M": 3,
+  "6M": 5,
+  "1Y": 21,
+  "2Y": 42,
+  "5Y": 63,
 };
 
 function PriceChart({ symbol }) {
@@ -257,7 +256,8 @@ function PriceChart({ symbol }) {
                 axisLine={false}
                 tickLine={false}
                 ticks={tickIndexes}
-                interval={0}
+                interval="preserveStartEnd"
+                minTickGap={35}
                 padding={{
                   left: 25,
                   right: 25,
@@ -268,6 +268,7 @@ function PriceChart({ symbol }) {
                 }}
                 tickFormatter={(index) => {
                   const point = data[index];
+
                   return point
                     ? formatDate(point.timestamp)
                     : "";
