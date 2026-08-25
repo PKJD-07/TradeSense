@@ -16,6 +16,9 @@ __pycache__/
 data/raw/*
 data/processed/*
 
+# ML experiment outputs
+outputs/
+
 # IDE
 .vscode/
 .idea/
