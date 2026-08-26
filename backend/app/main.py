@@ -8,6 +8,22 @@ from backend.app.api.routes.backtest import router as backtest_router
 app = FastAPI(title="TradeSense API")
 
 
+@app.get("/")
+def root():
+    return {
+        "message": "TradeSense API is running",
+        "docs": "/docs",
+    }
+
+
+@app.get("/api")
+def api_root():
+    return {
+        "message": "TradeSense API is running",
+        "docs": "/api/docs",
+    }
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -15,6 +31,7 @@ app.add_middleware(
         "http://localhost:5174",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
+        "https://tradesenseapi.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
