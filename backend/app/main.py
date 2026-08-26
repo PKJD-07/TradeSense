@@ -16,6 +16,14 @@ def root():
     }
 
 
+@app.get("/api")
+def api_root():
+    return {
+        "message": "TradeSense API is running",
+        "docs": "/api/docs",
+    }
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
