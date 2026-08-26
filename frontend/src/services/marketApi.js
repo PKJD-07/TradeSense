@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL =
+  "https://tradesense-backend-k45uhlo8e-mridul-inturus-projects.vercel.app";
 
 export async function getHistoricalData(
   symbol,
