@@ -172,20 +172,28 @@
 
 @media (max-width: 800px) {
   .navbar {
-    min-height: 78px;
-    padding: 10px 16px;
-    gap: 12px;
+    min-height: 112px;
+    height: auto;
+    padding: 10px 16px 8px;
+    gap: 8px;
     flex-wrap: wrap;
   }
 
+  /* =========================
+     BRAND
+  ========================= */
+
   .navbar-brand {
     gap: 10px;
+    flex-shrink: 1;
+    min-width: 0;
   }
 
   .navbar-logo {
     width: 36px;
     height: 36px;
     font-size: 11px;
+    flex-shrink: 0;
   }
 
   .navbar-title {
@@ -197,22 +205,42 @@
     margin-top: 2px;
   }
 
+  /* =========================
+     MARKET STATUS
+  ========================= */
+
   .navbar-status {
-    display: none;
+    display: flex;
+    margin-left: auto;
+    gap: 7px;
+    font-size: 11px;
+    flex-shrink: 0;
   }
 
-  /*
-    Keep navigation visible on mobile.
-    It becomes a horizontally scrollable row.
-  */
+  .status-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  /* =========================
+     NAVIGATION
+  ========================= */
+
   .navbar-links {
     order: 3;
     width: 100%;
+    flex-basis: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
     overflow-x: auto;
     overflow-y: hidden;
-    justify-content: flex-start;
+
     gap: 6px;
-    padding-bottom: 2px;
+    padding: 2px 0 2px;
+
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -225,6 +253,7 @@
     flex-shrink: 0;
     padding: 9px 14px;
     font-size: 13px;
+    white-space: nowrap;
   }
 }
 
@@ -234,13 +263,23 @@
 
 @media (max-width: 500px) {
   .navbar {
-    min-height: 112px;
-    padding: 10px 12px 8px;
+    min-height: 108px;
+    padding: 9px 12px 7px;
+    gap: 7px;
+  }
+
+  /* =========================
+     BRAND
+  ========================= */
+
+  .navbar-brand {
+    gap: 8px;
   }
 
   .navbar-logo {
     width: 34px;
     height: 34px;
+    font-size: 10px;
   }
 
   .navbar-title {
@@ -249,10 +288,31 @@
 
   .navbar-subtitle {
     font-size: 9px;
+    margin-top: 2px;
   }
+
+  /* =========================
+     MARKET STATUS
+  ========================= */
+
+  .navbar-status {
+    display: flex;
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* =========================
+     NAVIGATION
+  ========================= */
 
   .navbar-links {
     margin-top: 2px;
+    gap: 5px;
   }
 
   .nav-link {
