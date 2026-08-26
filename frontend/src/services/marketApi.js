@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
+const API_BASE_URL = "https://tradesense-backend-6ojk.onrender.com";
 
 export async function getHistoricalData(
   symbol,

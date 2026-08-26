@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./MarketTicker.css";
 
-const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
+const API_BASE_URL = "https://tradesense-backend-6ojk.onrender.com";
 
 function MarketTicker() {
   const [markets, setMarkets] = useState([]);

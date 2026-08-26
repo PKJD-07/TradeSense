@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
 
-const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
+const API_BASE_URL = "https://tradesense-backend-6ojk.onrender.com";
 
 function Navbar({ activePage, onNavigate }) {
   const [marketStatus, setMarketStatus] = useState("CLOSED");
