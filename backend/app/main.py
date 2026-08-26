@@ -17,14 +17,14 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
 
-        # Production frontend
+        # Production frontend deployment
+        "https://tradesense-amz1esd5d-mridul-inturus-projects.vercel.app",
+
+        # Previous production frontend deployment
         "https://tradesense-9pxs4gglv-mridul-inturus-projects.vercel.app",
 
-        # Production frontend aliases
+        # Production frontend alias
         "https://tradesense.vercel.app",
-
-        # Backend domain
-        "https://tradesenseapp-backend.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
