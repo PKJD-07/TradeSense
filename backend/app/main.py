@@ -8,7 +8,6 @@ from backend.app.api.routes.backtest import router as backtest_router
 app = FastAPI(title="TradeSense API")
 
 
-# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
