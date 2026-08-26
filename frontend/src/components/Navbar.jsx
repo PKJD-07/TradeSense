@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
 
+const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
+
 function Navbar({ activePage, onNavigate }) {
   const [marketStatus, setMarketStatus] = useState("CLOSED");
 
@@ -10,7 +12,7 @@ function Navbar({ activePage, onNavigate }) {
     async function fetchMarketStatus() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/market/overview"
+          `${API_BASE_URL}/market/overview`
         );
 
         if (!response.ok) {

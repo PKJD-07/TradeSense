@@ -1,6 +1,9 @@
+
 import { useEffect, useState } from "react";
 import StockSelector from "./StockSelector";
 import "./Signals.css";
+
+const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
 
 function Signals({ symbol, onSelect }) {
   const [data, setData] = useState(null);
@@ -14,7 +17,7 @@ function Signals({ symbol, onSelect }) {
         setError(null);
 
         const response = await fetch(
-          `http://127.0.0.1:8000/market/signal/${symbol}?period=3mo&interval=1d`
+          `${API_BASE_URL}/market/signal/${symbol}?period=3mo&interval=1d`
         );
 
         if (!response.ok) {

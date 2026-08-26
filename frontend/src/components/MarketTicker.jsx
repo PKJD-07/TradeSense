@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./MarketTicker.css";
 
+const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
+
 function MarketTicker() {
   const [markets, setMarkets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +11,7 @@ function MarketTicker() {
     async function fetchMarkets() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/market/overview"
+          `${API_BASE_URL}/market/overview`
         );
 
         if (!response.ok) {
