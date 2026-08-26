@@ -1,16 +1,14 @@
 .navbar {
-  height: 84px;
+  min-height: 84px;
   padding: 0 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  gap: 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-
   background: rgba(5, 5, 5, 0.68);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-
   box-sizing: border-box;
 }
 
@@ -22,28 +20,25 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-shrink: 0;
 }
 
 .navbar-logo {
   width: 42px;
   height: 42px;
-
   display: grid;
   place-items: center;
-
   border: 1px solid rgba(177, 157, 60, 0.65);
   border-radius: 9px;
-
   color: #b19d3c;
-
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 .navbar-title {
   color: #f5f2e9;
-
   font-size: 21px;
   font-weight: 600;
   line-height: 1.1;
@@ -52,9 +47,7 @@
 
 .navbar-subtitle {
   margin-top: 4px;
-
   color: rgba(255, 255, 255, 0.42);
-
   font-size: 12px;
   line-height: 1.2;
 }
@@ -67,27 +60,24 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .nav-link {
   padding: 11px 17px;
-
   border: 1px solid transparent;
   border-radius: 8px;
-
   background: transparent;
   color: rgba(255, 255, 255, 0.58);
-
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
-
   cursor: pointer;
-
   transition:
     color 0.2s ease,
     background 0.2s ease,
     border-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -97,7 +87,6 @@
 
 .nav-link.active {
   color: #b19d3c;
-
   border-color: rgba(177, 157, 60, 0.18);
   background: rgba(177, 157, 60, 0.07);
 }
@@ -110,23 +99,18 @@
   display: flex;
   align-items: center;
   gap: 9px;
-
   color: rgba(255, 255, 255, 0.65);
-
   font-size: 13px;
   font-weight: 500;
-
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .status-dot {
   width: 8px;
   height: 8px;
-
   flex-shrink: 0;
-
   border-radius: 50%;
-
   transition:
     background 0.2s ease,
     box-shadow 0.2s ease;
@@ -159,12 +143,13 @@
 }
 
 /* =========================================
-   RESPONSIVE
+   TABLET
 ========================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .navbar {
     padding: 0 28px;
+    gap: 16px;
   }
 
   .navbar-links {
@@ -172,35 +157,106 @@
   }
 
   .nav-link {
-    padding: 10px 13px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .navbar-status {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+  .navbar {
+    min-height: 78px;
+    padding: 10px 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand {
+    gap: 10px;
+  }
+
+  .navbar-logo {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .navbar-title {
+    font-size: 18px;
+  }
+
+  .navbar-subtitle {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  .navbar-status {
+    display: none;
+  }
+
+  /*
+    Keep navigation visible on mobile.
+    It becomes a horizontally scrollable row.
+  */
+  .navbar-links {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: flex-start;
+    gap: 6px;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    flex-shrink: 0;
+    padding: 9px 14px;
     font-size: 13px;
   }
 }
 
-@media (max-width: 800px) {
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 500px) {
   .navbar {
-    height: 78px;
-    padding: 0 20px;
+    min-height: 112px;
+    padding: 10px 12px 8px;
   }
 
   .navbar-logo {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
   }
 
   .navbar-title {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .navbar-subtitle {
-    font-size: 11px;
+    font-size: 9px;
   }
 
   .navbar-links {
-    display: none;
+    margin-top: 2px;
   }
 
-  .navbar-market-status {
-    display: none;
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
