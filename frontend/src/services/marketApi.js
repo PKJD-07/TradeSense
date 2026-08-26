@@ -1,5 +1,4 @@
-const API_BASE_URL =
-  "https://tradesense-backend-k45uhlo8e-mridul-inturus-projects.vercel.app";
+const API_BASE_URL = "https://tradesenseapp-backend.vercel.app";
 
 export async function getHistoricalData(
   symbol,
@@ -7,11 +6,19 @@ export async function getHistoricalData(
   interval = "1d"
 ) {
   const response = await fetch(
-    `${API_BASE_URL}/market/historical/${symbol}?period=${period}&interval=${interval}`
+    `${API_BASE_URL}/market/historical/${encodeURIComponent(
+      symbol
+    )}?period=${encodeURIComponent(period)}&interval=${encodeURIComponent(
+      interval
+    )}`
   );
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${symbol} market data`);
+    const error = await response.json().catch(() => null);
+
+    throw new Error(
+      error?.detail || `Failed to fetch ${symbol} market data`
+    );
   }
 
   return response.json();
@@ -23,11 +30,19 @@ export async function getMarketSignal(
   interval = "1d"
 ) {
   const response = await fetch(
-    `${API_BASE_URL}/market/signal/${symbol}?period=${period}&interval=${interval}`
+    `${API_BASE_URL}/market/signal/${encodeURIComponent(
+      symbol
+    )}?period=${encodeURIComponent(period)}&interval=${encodeURIComponent(
+      interval
+    )}`
   );
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${symbol} market signal`);
+    const error = await response.json().catch(() => null);
+
+    throw new Error(
+      error?.detail || `Failed to fetch ${symbol} market signal`
+    );
   }
 
   return response.json();
@@ -50,7 +65,7 @@ export async function getBacktest(
   });
 
   const response = await fetch(
-    `${API_BASE_URL}/backtest/${symbol}?${params.toString()}`
+    `${API_BASE_URL}/backtest/${encodeURIComponent(symbol)}?${params.toString()}`
   );
 
   if (!response.ok) {
