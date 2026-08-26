@@ -8,6 +8,7 @@ from backend.app.api.routes.backtest import router as backtest_router
 app = FastAPI(title="TradeSense API")
 
 
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -19,14 +20,8 @@ app.add_middleware(
         "http://127.0.0.1:5174",
         "http://127.0.0.1:5175",
 
-        # Production frontend deployment
-        "https://tradesense-amz1esd5d-mridul-inturus-projects.vercel.app",
-
-        # Previous production frontend deployment
-        "https://tradesense-9pxs4gglv-mridul-inturus-projects.vercel.app",
-
-        # Production frontend alias
-        "https://tradesense.vercel.app",
+        # Production frontend
+        "https://tradesenseapi.netlify.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
