@@ -1,18 +1,12 @@
 .price-chart-section {
   width: 100%;
-
   margin-top: 18px;
   padding: 28px 30px 24px;
-
   box-sizing: border-box;
-
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
-
   background: rgba(5, 5, 5, 0.72);
-
   backdrop-filter: blur(22px);
-
   box-shadow:
     0 30px 80px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
@@ -26,13 +20,12 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .chart-eyebrow {
   margin-bottom: 9px;
-
   color: #b19d3c;
-
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -46,9 +39,7 @@
 
 .chart-title-row h3 {
   margin: 0;
-
   color: #f5f2e9;
-
   font-size: 23px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -56,7 +47,6 @@
 
 .chart-title-row span {
   color: rgba(255, 255, 255, 0.4);
-
   font-size: 11px;
 }
 
@@ -68,27 +58,24 @@
   display: flex;
   align-items: center;
   gap: 13px;
+  flex-shrink: 0;
 }
 
 .chart-price strong {
   color: #f5f2e9;
-
   font-size: 23px;
   font-weight: 500;
-
   letter-spacing: -0.025em;
 }
 
 .chart-positive {
   color: #72b957;
-
   font-size: 13px;
   font-weight: 600;
 }
 
 .chart-negative {
   color: #d06464;
-
   font-size: 13px;
   font-weight: 600;
 }
@@ -101,31 +88,46 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  gap: 20px;
   margin-top: 28px;
   padding-bottom: 15px;
-
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
+/* =========================================
+   TIMEFRAMES
+========================================= */
+
 .chart-timeframes {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  min-width: max-content;
 }
 
 .chart-timeframes button {
-  padding: 7px 12px;
+  flex: 0 0 auto;
+  min-width: 42px;
+  height: 32px;
+  padding: 0 12px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   border: 1px solid transparent;
   border-radius: 5px;
 
   background: transparent;
-
   color: rgba(255, 255, 255, 0.42);
 
   font-family: inherit;
   font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
 
+  white-space: nowrap;
   cursor: pointer;
 
   transition:
@@ -141,28 +143,31 @@
 
 .chart-timeframes button.active {
   color: #b19d3c;
-
   border-color: rgba(177, 157, 60, 0.2);
-
   background: rgba(177, 157, 60, 0.08);
 }
+
+/* =========================================
+   CHART INFO
+========================================= */
 
 .chart-info {
   display: flex;
   align-items: center;
   gap: 8px;
 
-  color: rgba(255, 255, 255, 0.38);
+  flex-shrink: 0;
 
+  color: rgba(255, 255, 255, 0.38);
   font-size: 11px;
+  white-space: nowrap;
 }
 
 .chart-dot {
   width: 6px;
   height: 6px;
-
+  flex-shrink: 0;
   border-radius: 50%;
-
   background: #b19d3c;
 }
 
@@ -173,9 +178,7 @@
 .chart-container {
   width: 100%;
   height: 360px;
-
   padding-top: 20px;
-
   box-sizing: border-box;
 }
 
@@ -192,7 +195,6 @@
   justify-content: center;
 
   color: rgba(255, 255, 255, 0.48);
-
   font-size: 14px;
 }
 
@@ -221,10 +223,43 @@
   .chart-toolbar {
     align-items: flex-start;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
+  }
+
+  .chart-timeframes {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    padding-bottom: 2px;
+
+    scrollbar-width: none;
+  }
+
+  .chart-timeframes::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chart-timeframes button {
+    min-width: 44px;
+    flex-shrink: 0;
+  }
+
+  .chart-info {
+    align-self: flex-start;
   }
 
   .chart-container {
     height: 280px;
+  }
+}
+
+@media (max-width: 420px) {
+  .chart-timeframes {
+    gap: 4px;
+  }
+
+  .chart-timeframes button {
+    min-width: 42px;
+    padding: 0 10px;
   }
 }
