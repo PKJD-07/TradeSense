@@ -21,12 +21,12 @@ const TIMEFRAMES = {
 };
 
 const LABEL_COUNTS = {
-  "1M": 5,
+  "1M": 6,
   "3M": 6,
   "6M": 6,
-  "1Y": 8,
-  "2Y": 8,
-  "5Y": 8,
+  "1Y": 6,
+  "2Y": 6,
+  "5Y": 6,
 };
 
 function PriceChart({ symbol }) {
@@ -118,8 +118,9 @@ function PriceChart({ symbol }) {
       : null;
 
   /*
-   * Distribute a fixed number of labels evenly
-   * across the entire chart.
+   * Keep a maximum of 6 labels for every timeframe.
+   * Labels are distributed evenly from the first
+   * data point to the last data point.
    */
   const getTickIndexes = () => {
     if (data.length === 0) {
