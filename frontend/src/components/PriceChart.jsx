@@ -20,13 +20,13 @@ const TIMEFRAMES = {
   "5Y": "5y",
 };
 
-const LABEL_INTERVALS = {
+const LABEL_COUNTS = {
   "1M": 5,
-  "3M": 10,
-  "6M": 15,
-  "1Y": 21,
-  "2Y": 42,
-  "5Y": 63,
+  "3M": 6,
+  "6M": 6,
+  "1Y": 8,
+  "2Y": 8,
+  "5Y": 8,
 };
 
 function PriceChart({ symbol }) {
@@ -83,7 +83,9 @@ function PriceChart({ symbol }) {
         setData(formattedData);
       } catch (err) {
         if (!cancelled) {
-          setError(err.message || "Unable to load market data");
+          setError(
+            err.message || "Unable to load market data"
+          );
         }
       } finally {
         if (!cancelled) {
@@ -116,42 +118,38 @@ function PriceChart({ symbol }) {
       : null;
 
   /*
-   * Label spacing:
-   *
-   * 1M = every 5 trading days
-   * 3M = every 10 trading days
-   * 6M = every 15 trading days
-   * 1Y = every ~1 month
-   * 2Y = every ~2 months
-   * 5Y = every ~3 months
+   * Distribute a fixed number of labels evenly
+   * across the entire chart.
    */
-  const labelInterval = LABEL_INTERVALS[timeframe];
-
-  const tickIndexes = [];
-
-  for (
-    let i = 0;
-    i < data.length;
-    i += labelInterval
-  ) {
-    tickIndexes.push(i);
-  }
-
-  /*
-   * Show the final date only when it is not too close
-   * to the previous label.
-   */
-  if (data.length > 0) {
-    const lastIndex = data.length - 1;
-    const lastTick =
-      tickIndexes.length > 0
-        ? tickIndexes[tickIndexes.length - 1]
-        : -1;
-
-    if (lastIndex - lastTick >= Math.max(3, labelInterval / 2)) {
-      tickIndexes.push(lastIndex);
+  const getTickIndexes = () => {
+    if (data.length === 0) {
+      return [];
     }
-  }
+
+    const targetLabels = Math.min(
+      LABEL_COUNTS[timeframe],
+      data.length
+    );
+
+    if (targetLabels === 1) {
+      return [0];
+    }
+
+    const indexes = [];
+
+    for (let i = 0; i < targetLabels; i++) {
+      const index = Math.round(
+        (i * (data.length - 1)) /
+          (targetLabels - 1)
+      );
+
+      indexes.push(index);
+    }
+
+    return [...new Set(indexes)];
+  };
+
+  const tickIndexes = getTickIndexes();
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -251,7 +249,10 @@ function PriceChart({ symbol }) {
             <span>No market data available.</span>
           </div>
         ) : (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <AreaChart
               data={data}
               margin={{
@@ -296,8 +297,8 @@ function PriceChart({ symbol }) {
                 ticks={tickIndexes}
                 interval={0}
                 padding={{
-                  left: isMobile ? 10 : 25,
-                  right: isMobile ? 10 : 25,
+                  left: 20,
+                  right: 20,
                 }}
                 tick={{
                   fill: "rgba(255,255,255,0.45)",
@@ -314,7 +315,10 @@ function PriceChart({ symbol }) {
               />
 
               <YAxis
-                domain={["dataMin - 10", "dataMax + 10"]}
+                domain={[
+                  "dataMin - 10",
+                  "dataMax + 10",
+                ]}
                 axisLine={false}
                 tickLine={false}
                 width={isMobile ? 58 : 78}
