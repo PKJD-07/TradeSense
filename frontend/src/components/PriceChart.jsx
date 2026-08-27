@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -22,12 +21,12 @@ const TIMEFRAMES = {
 };
 
 const LABEL_INTERVALS = {
-  "1M": 1,   // every trading day
-  "3M": 3,   // every 3 trading days
-  "6M": 5,   // every 5 trading days
-  "1Y": 21,  // approximately every 1 month
-  "2Y": 42,  // approximately every 2 months
-  "5Y": 63,  // approximately every 3 months
+  "1M": 1,
+  "3M": 3,
+  "6M": 5,
+  "1Y": 21,
+  "2Y": 42,
+  "5Y": 63,
 };
 
 function PriceChart({ symbol }) {
@@ -35,6 +34,22 @@ function PriceChart({ symbol }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= 600
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -100,7 +115,11 @@ function PriceChart({ symbol }) {
       ? (change / previousPrice) * 100
       : null;
 
-  const labelInterval = LABEL_INTERVALS[timeframe];
+  const baseInterval = LABEL_INTERVALS[timeframe];
+
+  const labelInterval = isMobile
+    ? Math.max(baseInterval, 4)
+    : baseInterval;
 
   const tickIndexes = [];
 
@@ -219,8 +238,8 @@ function PriceChart({ symbol }) {
               data={data}
               margin={{
                 top: 20,
-                right: 35,
-                left: 5,
+                right: isMobile ? 15 : 35,
+                left: isMobile ? 0 : 5,
                 bottom: 5,
               }}
             >
@@ -259,15 +278,17 @@ function PriceChart({ symbol }) {
                 ticks={tickIndexes}
                 interval={0}
                 padding={{
-                  left: 25,
-                  right: 25,
+                  left: isMobile ? 10 : 25,
+                  right: isMobile ? 10 : 25,
                 }}
                 tick={{
                   fill: "rgba(255,255,255,0.45)",
-                  fontSize: 11,
+                  fontSize: isMobile ? 9 : 11,
                 }}
+                tickMargin={8}
                 tickFormatter={(index) => {
                   const point = data[index];
+
                   return point
                     ? formatDate(point.timestamp)
                     : "";
@@ -278,10 +299,10 @@ function PriceChart({ symbol }) {
                 domain={["dataMin - 10", "dataMax + 10"]}
                 axisLine={false}
                 tickLine={false}
-                width={78}
+                width={isMobile ? 58 : 78}
                 tick={{
                   fill: "rgba(255,255,255,0.45)",
-                  fontSize: 11,
+                  fontSize: isMobile ? 9 : 11,
                 }}
                 tickFormatter={(value) =>
                   `₹${Number(value).toLocaleString(
