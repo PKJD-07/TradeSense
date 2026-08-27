@@ -21,9 +21,9 @@ const TIMEFRAMES = {
 };
 
 const LABEL_INTERVALS = {
-  "1M": 1,
-  "3M": 3,
-  "6M": 5,
+  "1M": 5,
+  "3M": 10,
+  "6M": 15,
   "1Y": 21,
   "2Y": 42,
   "5Y": 63,
@@ -115,24 +115,42 @@ function PriceChart({ symbol }) {
       ? (change / previousPrice) * 100
       : null;
 
-  const baseInterval = LABEL_INTERVALS[timeframe];
-
-  const labelInterval = isMobile
-    ? Math.max(baseInterval, 4)
-    : baseInterval;
+  /*
+   * Label spacing:
+   *
+   * 1M = every 5 trading days
+   * 3M = every 10 trading days
+   * 6M = every 15 trading days
+   * 1Y = every ~1 month
+   * 2Y = every ~2 months
+   * 5Y = every ~3 months
+   */
+  const labelInterval = LABEL_INTERVALS[timeframe];
 
   const tickIndexes = [];
 
-  for (let i = 0; i < data.length; i += labelInterval) {
+  for (
+    let i = 0;
+    i < data.length;
+    i += labelInterval
+  ) {
     tickIndexes.push(i);
   }
 
-  // Always show the final date.
-  if (
-    data.length > 0 &&
-    !tickIndexes.includes(data.length - 1)
-  ) {
-    tickIndexes.push(data.length - 1);
+  /*
+   * Show the final date only when it is not too close
+   * to the previous label.
+   */
+  if (data.length > 0) {
+    const lastIndex = data.length - 1;
+    const lastTick =
+      tickIndexes.length > 0
+        ? tickIndexes[tickIndexes.length - 1]
+        : -1;
+
+    if (lastIndex - lastTick >= Math.max(3, labelInterval / 2)) {
+      tickIndexes.push(lastIndex);
+    }
   }
 
   const formatDate = (timestamp) => {
